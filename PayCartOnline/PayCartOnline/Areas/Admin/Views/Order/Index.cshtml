@@ -107,7 +107,7 @@
                     </div>
                     
                     <div class="card">
-                        <form action="/Admin/Order" method="Post">
+                        
                             <div class="card-header row">
 
                                 <!-- Date range -->
@@ -119,11 +119,11 @@
                                         </div>
                                         @if (startDate != null)
                                         {
-                                            <input type="date" name="startDate" class="form-control float-right" id="reservation" value="@startDate">
+                                            <input type="date" name="startDate" class="form-control float-right" id="startDate" value="@startDate">
                                         }
                                         else
                                         {
-                                            <input type="date" name="startDate" class="form-control float-right" id="reservation">
+                                            <input type="date" name="startDate" class="form-control float-right" id="startDate">
                                         }
 
                                     </div>
@@ -135,7 +135,7 @@
                                         <div class="input-group-prepend">
 
                                         </div>
-                                        <input type="date" name="expiration" class="form-control float-right" id="reservation">
+                                        <input type="date" name="expiration" class="form-control float-right" id="expiration">
                                     </div>
                                     <!-- /.input group -->
                                 </div>
@@ -143,7 +143,7 @@
                                 <!-- Date and time range -->
                                 <div class="form-group col-md-4 col-lg-4 col-sm-4 ">
                                     <label>Status</label>
-                                    <select class="form-control select2" style="width: 100%;" name="status">
+                                    <select class="form-control select2" style="width: 100%;" id="status" name="status">
                                         <option selected="selected">Tất cả</option>
                                         @if (status != null)
                                         {
@@ -177,11 +177,11 @@
 
                                         @if (phone != null)
                                         {
-                                            <input type="number" name="phone" class="form-control float-right" id="" placeholder=" Số Điện Thoại" value="@phone">
+                                            <input type="number" name="phone" class="form-control float-right" id="phone" placeholder=" Số Điện Thoại" value="@phone">
                                         }
                                         else
                                         {
-                                            <input type="number" name="phone" class="form-control float-right" id="" placeholder=" Số Điện Thoại">
+                                            <input type="number" name="phone" class="form-control float-right" id="phone" placeholder=" Số Điện Thoại" >
                                         }
 
                                     </div>
@@ -192,7 +192,7 @@
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                         </div>
-                                        <select class="form-control select2" style="width: 100%;" name="id_denomination">
+                                        <select class="form-control select2" style="width: 100%;" name="id_denomination" id="id_denomination">
                                             <option selected="selected">Mệnh giá</option>
                                             @foreach (var item in denominations)
                                             {
@@ -217,11 +217,11 @@
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                         </div>
-                                        <button class="btn btn-success">Tìm Kiếm</button>
+                                        <button onclick="submit()" class="btn btn-success">Tìm Kiếm</button>
                                     </div>
                                     <!-- /.input group -->
                                 </div>
-                        </form>
+                       
                     </div>
                   
                     <!-- /.card-header -->

@@ -14,14 +14,30 @@ namespace PayCartOnline.Areas.Admin.Controllers
         HandleOrder db = new HandleOrder();
         Handle sv = new Handle();
         // GET: Admin/Order
-        public ActionResult Index(int? i, int? page)
+        public ActionResult Index(int? i, int? page, DateTime? startDate, DateTime? expiration, int? status, int? phone, int? id_denomination)
         {
             List<Denomination> denominations = sv.ShowDenomination();
             ViewBag.denomination = denominations;
             List<Order> orders = new List<Order>();
             if ((CheckUser)Session["Account"] != null)
-            {               
-                orders = db.ListOrder();
+            {   
+                if(startDate != null || expiration != null || status != null|| phone != null || id_denomination != null)
+                {
+
+                    SearchHistory search = new SearchHistory()
+                    { StartDate = startDate, ExpirationDate = expiration, Status = status, Phone = phone, Id_denomination = id_denomination };
+                    orders = db.SearchOrder(search);
+                    ViewBag.startDate = startDate;
+                    ViewBag.expiration = expiration;
+                    ViewBag.status = status;
+                    ViewBag.phone = phone;
+                    ViewBag.id_denomination = id_denomination;
+                }
+                else
+                {
+                    orders = db.ListOrder();
+                }
+               
 
                 int total = 0;
                 int orderSuccess = 0;
@@ -32,7 +48,7 @@ namespace PayCartOnline.Areas.Admin.Controllers
                 foreach (var item in orders)
                 {
 
-                    total += item.Status.Equals("Thành Công") ? item.Total : 0;
+                    total += item.Total;
                     _ = item.Status.Equals("Thành Công") ? orderSuccess++ : order_Error++;
                 }
                 ViewBag.orderSuccess = orderSuccess;
@@ -71,71 +87,63 @@ namespace PayCartOnline.Areas.Admin.Controllers
             
         }
 
-        [HttpPost]
-        public ActionResult Index(int? i, int? page, DateTime? startDate, DateTime? expiration, int? status, int? phone, int? id_denomination)
-        {
-            List<Denomination> denominations = sv.ShowDenomination();
-            ViewBag.denomination = denominations;
-            List<Order> orders = new List<Order>();
-            if ((CheckUser)Session["Account"] != null)
-            {
-              
-                    SearchHistory search = new SearchHistory()
-                    { StartDate = startDate, ExpirationDate = expiration, Status = status, Phone = phone, Id_denomination = id_denomination };
-                    orders = db.SearchOrder(search);
-                    ViewBag.startDate = startDate;
-                    ViewBag.expiration = expiration;
-                    ViewBag.status = status;
-                    ViewBag.phone = phone;
-                    ViewBag.id_denomination = id_denomination;
+        //    [HttpGet]
+        //    public ActionResult Index(int? i, int? page, DateTime? startDate, DateTime? expiration, int? status, int? phone, int? id_denomination)
+        //    {
+        //        List<Denomination> denominations = sv.ShowDenomination();
+        //        ViewBag.denomination = denominations;
+        //        List<Order> orders = new List<Order>();
+        //        if ((CheckUser)Session["Account"] != null)
+        //        {
 
-                
-                int total = 0;
-                int orderSuccess = 0;
-                int order_Error = 0;
-                //List<Order> orders = db.ListOrder();
 
-                int countOrder = orders.Count;
-                foreach (var item in orders)
-                {
 
-                    total += item.Status.Equals("Thành Công") ? item.Total : 0;
-                    _ = item.Status.Equals("Thành Công") ? orderSuccess++ : order_Error++;
-                }
-                ViewBag.orderSuccess = orderSuccess;
-                ViewBag.order_Error = order_Error;
-                ViewBag.total = total;
-                ViewBag.count = countOrder;
+        //            int total = 0;
+        //            int orderSuccess = 0;
+        //            int order_Error = 0;
+        //            //List<Order> orders = db.ListOrder();
 
-                //
-                int pageSize = 5;
+        //            int countOrder = orders.Count;
+        //            foreach (var item in orders)
+        //            {
 
-                if (page > 0)
-                {
-                    page = page;
-                }
-                else
-                {
-                    page = 1;
-                }
-                int start = (int)(page - 1) * pageSize;
+        //                total += item.Total;
+        //                _ = item.Status.Equals("Thành Công") ? orderSuccess++ : order_Error++;
+        //            }
+        //            ViewBag.orderSuccess = orderSuccess;
+        //            ViewBag.order_Error = order_Error;
+        //            ViewBag.total = total;
+        //            ViewBag.count = countOrder;
 
-                ViewBag.pageCurrent = page;
-                int totalPage = orders.Count();
-                float totalNumsize = (totalPage / (float)pageSize);
-                int numSize = (int)Math.Ceiling(totalNumsize);
-                ViewBag.totalPage = totalPage;
-                ViewBag.pageSize = pageSize;
-                ViewBag.numSize = numSize;
-                ViewBag.numSize = numSize;
-                ViewBag.orders = orders.OrderByDescending(x => x.Id_order).Skip(start).Take(pageSize);
-                return View();
-            }
-            else
-            {
-                return RedirectToAction("Index", "Admin");
-            }
+        //            //
+        //            int pageSize = 5;
 
-        }
+        //            if (page > 0)
+        //            {
+        //                page = page;
+        //            }
+        //            else
+        //            {
+        //                page = 1;
+        //            }
+        //            int start = (int)(page - 1) * pageSize;
+
+        //            ViewBag.pageCurrent = page;
+        //            int totalPage = orders.Count();
+        //            float totalNumsize = (totalPage / (float)pageSize);
+        //            int numSize = (int)Math.Ceiling(totalNumsize);
+        //            ViewBag.totalPage = totalPage;
+        //            ViewBag.pageSize = pageSize;
+        //            ViewBag.numSize = numSize;
+        //            ViewBag.numSize = numSize;
+        //            ViewBag.orders = orders.OrderByDescending(x => x.Id_order).Skip(start).Take(pageSize);
+        //            return View();
+        //        }
+        //        else
+        //        {
+        //            return RedirectToAction("Index", "Admin");
+        //        }
+
+        //    }
     }
 }
