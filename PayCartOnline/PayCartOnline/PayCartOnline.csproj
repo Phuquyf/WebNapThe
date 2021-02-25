@@ -2724,6 +2724,7 @@
     <Content Include="Areas\Admin\Views\Denomination\Update.cshtml" />
     <Content Include="Areas\Admin\Views\Order\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\Customine\js\AdminOrder.js" />
     <Content Include="Scripts\Customine\js\HistoryDetail.js" />
     <Content Include="Scripts\Customine\js\UpdateAcc.js" />
     <Content Include="Scripts\dataTables.bootstrap4.min.js" />

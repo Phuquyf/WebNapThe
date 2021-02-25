@@ -12,8 +12,10 @@ namespace PayCartOnline.Models
         public DateTime? ExpirationDate { get; set; }
         public int? TypePay { get; set; }
         public int? Status { get; set; }
+        public int? Phone { get; set; }
+        public int? Id_denomination { get; set; }
 
-       
+
 
     }
 }

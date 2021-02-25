@@ -50,7 +50,7 @@ namespace PayCartOnline.Service
         public List<Order> SearchOrder(SearchHistory search)
         {
             var status = "";
-            if (search.Status != 0)
+            if (search.Status != 0 && search.Status != null)
             {
                 status = search.Status == 1 ? "Thành Công" : "Chưa Thanh Toán";
             }
@@ -67,8 +67,8 @@ namespace PayCartOnline.Service
 
 
             com.Parameters.AddWithValue("@expirationDate", System.Data.SqlDbType.DateTime).Value = search.ExpirationDate == null ? DBNull.Value : (object)search.ExpirationDate;
-
-            //com.Parameters.AddWithValue("@typePay", System.Data.SqlDbType.Int).Value = search.TypePay == 0 ? DBNull.Value : (object)search.TypePay;
+            com.Parameters.AddWithValue("@id_denomination", System.Data.SqlDbType.Int).Value = search.Id_denomination == 0 ? DBNull.Value : (object)search.Id_denomination;
+            com.Parameters.AddWithValue("@phone", System.Data.SqlDbType.Int).Value = search.Phone == 0 ? DBNull.Value : (object)search.Phone;
             com.Parameters.AddWithValue("@status", System.Data.SqlDbType.NVarChar).Value = String.IsNullOrEmpty(status) ? DBNull.Value : (object)status;
             SqlDataAdapter da = new SqlDataAdapter(com);
             DataTable ds = new DataTable();

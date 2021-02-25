@@ -8,6 +8,12 @@
     var orderSuccess = ViewBag.orderSuccess;
     var order_Error = ViewBag.order_Error;
     System.Globalization.CultureInfo culture = new System.Globalization.CultureInfo("en-US");
+    List<PayCartOnline.Models.Denomination> denominations = ViewBag.denomination;
+    var startDate = ViewBag.startDate != null ? ViewBag.startDate : null;
+    var expiration = ViewBag.expiration != null ? ViewBag.expiration : null;
+    var status = ViewBag.status != null ? ViewBag.status : null;
+    var phone=ViewBag.phone != null ? ViewBag.phone : null;
+    var id_denomination= ViewBag.id_denomination != null ? ViewBag.id_denomination : null;
 
 }
 <div class="content-wrapper">
@@ -99,10 +105,11 @@
                         </div>
                         <!-- /.col -->
                     </div>
-                    <form>
-                        <div class="card">
+                    
+                    <div class="card">
+                        <form action="/Admin/Order" method="Post">
                             <div class="card-header row">
-                                <form action="/Admin/Order" method="GET"></form>
+
                                 <!-- Date range -->
                                 <div class="form-group col-lg-4 col-sm-4 col-md-4">
                                     <label>Start Date</label>
@@ -110,7 +117,15 @@
                                         <div class="input-group-prepend">
 
                                         </div>
-                                        <input type="date" name="startDate" class="form-control float-right" id="reservation">
+                                        @if (startDate != null)
+                                        {
+                                            <input type="date" name="startDate" class="form-control float-right" id="reservation" value="@startDate">
+                                        }
+                                        else
+                                        {
+                                            <input type="date" name="startDate" class="form-control float-right" id="reservation">
+                                        }
+
                                     </div>
                                     <!-- /.input group -->
                                 </div>
@@ -126,22 +141,89 @@
                                 </div>
                                 <!-- /.form group -->
                                 <!-- Date and time range -->
-                                <div class="form-group col-md-2 col-lg-2 col-sm-2 ">
+                                <div class="form-group col-md-4 col-lg-4 col-sm-4 ">
                                     <label>Status</label>
                                     <select class="form-control select2" style="width: 100%;" name="status">
                                         <option selected="selected">Tất cả</option>
-                                        <option value="1">Thành Công</option>
-                                        <option value="-1">Chưa Thanh Toán	</option>
-                                       
-                                    </select>
-                                </div>                          
-                                <div class="form-group col-md-2 col-lg-2 col-sm-2 ">
-                                    <label style="color:#fff" >Status</label>
-                                    <button class="form-control btn btn-success">Tìm kiếm</button>
-                                </div>
+                                        @if (status != null)
+                                        {
+                                            if (status == 1)
+                                            {
+                                                <option selected value="1">Thành Công</option>
+                                                <option value="-1">Chưa Thanh Toán  </option>
+                                            }
+                                            else
+                                            {
+                                                <option  value="1">Thành Công</option>
+                                                <option selected value="-1">Chưa Thanh Toán  </option>
+                                            }
 
-                            </div>
-                    </form>
+                                        }
+                                        else
+                                        {
+                                            <option value="1">Thành Công</option>
+                                            <option value="-1">Chưa Thanh Toán  </option>
+                                        }
+
+
+
+                                    </select>
+                                </div>
+                                <div class="form-group col-lg-4 col-sm-4 col-md-4">
+                                    @*<label>Search SĐT :</label>*@
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                        </div>
+
+                                        @if (phone != null)
+                                        {
+                                            <input type="number" name="phone" class="form-control float-right" id="" placeholder=" Số Điện Thoại" value="@phone">
+                                        }
+                                        else
+                                        {
+                                            <input type="number" name="phone" class="form-control float-right" id="" placeholder=" Số Điện Thoại">
+                                        }
+
+                                    </div>
+                                    <!-- /.input group -->
+                                </div>
+                                <div class="form-group col-lg-4 col-sm-4 col-md-4">
+                                    @*<label>Search Mệnh Giá :</label>*@
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                        </div>
+                                        <select class="form-control select2" style="width: 100%;" name="id_denomination">
+                                            <option selected="selected">Mệnh giá</option>
+                                            @foreach (var item in denominations)
+                                            {
+                                                if (id_denomination == item.ID)
+                                                {
+                                                    <option selected value="@item.ID">@String.Format(culture, "{0:N0}", @item.Price)VND</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="@item.ID">@String.Format(culture, "{0:N0}", @item.Price)VND</option>
+                                                }
+
+                                            }
+
+
+                                        </select>
+                                    </div>
+                                    <!-- /.input group -->
+                                </div>
+                                <div class="form-group col-lg-4 col-sm-4 col-md-4">
+                                    @*<label>abc</label>*@
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                        </div>
+                                        <button class="btn btn-success">Tìm Kiếm</button>
+                                    </div>
+                                    <!-- /.input group -->
+                                </div>
+                        </form>
+                    </div>
+                  
                     <!-- /.card-header -->
                     <div class="card-body">
                         @*<table id="example2" class="table table-bordered table-hover">
@@ -275,4 +357,4 @@
     <!-- /.content -->
 </div>
 
-
+<script src="~/Scripts/Customine/js/AdminOrder.js"></script>
