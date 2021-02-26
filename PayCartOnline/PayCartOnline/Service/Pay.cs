@@ -17,6 +17,8 @@ namespace PayCartOnline.Service
         SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DuAn"].ConnectionString);
         private const string InsertOrder = "InsertOrder";
         private const string UpdateOrders = "UpdateOrders";
+        private const string CancelOrder = "CancelOrder";
+        
         public void AddOrder(VnPayResponse vnPayResponse, CheckUser user, InforOrder order)
         {
 
@@ -87,6 +89,37 @@ namespace PayCartOnline.Service
                 Console.WriteLine(e.Message);
             }
             
+        }
+
+        public void CancelOrders(string status,int id_order)
+        {
+
+            var connection = new SqlConnection(connectionString);
+
+          
+            try
+            {
+                connection.Open();
+                var command = connection.CreateCommand();
+
+                command.CommandType = CommandType.StoredProcedure;
+                command.CommandText = CancelOrder;
+
+               
+
+                command.Parameters.Add(new SqlParameter("@order_id", id_order));
+
+                command.Parameters.Add(new SqlParameter("@status", status));
+
+                command.ExecuteNonQuery();
+                connection.Close();
+            }
+
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
         }
     }
 }

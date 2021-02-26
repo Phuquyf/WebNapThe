@@ -3,16 +3,18 @@
     var order = ViewBag.order;
     PayCartOnline.Models.CheckUser isCheck = Session["Account"] != null ? (PayCartOnline.Models.CheckUser)Session["Account"] : null;
     System.Globalization.CultureInfo culture = new System.Globalization.CultureInfo("en-US");
-
+    var maso = order.Id_order * 24;
 }
 
 
-
+<style>
+   
+</style>
 <div class="all_noidung_admin">
     <div class="box_giaodien_doanhnghiep">
         <div class="container content-pay">
             <div class="row">
-                <div class="col-lg-7 col-md-12 col-sm-12 col-xs-12">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="box_info_doanhnghiep">
                         <div class="img_thumb_info_doanhnghiep"><img style="width: 100%; height: 80px;" src="https://vtcpay.vn/Content/images/df_avt.png" alt=""></div>
                         <div class="text_info_doanhnghiep">
@@ -20,12 +22,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
-                    <ul class="box_all_tien_doanhnghiep">
-                        <li><em>Số đơn hàng</em></li>
-                        <li><a href="/Home/Index">Giao diện mua hàng</a></li>
-                    </ul>
-                </div>
+                
             </div>
         </div>
     </div>
@@ -47,9 +44,9 @@
                                         <div id="main-content">
                                             <div id="header">
                                                 <div class="header-right" style="float: right; width: 25%; padding:10px 0; padding-top: 40px">
-                                                    <p style="padding-top:5px" class="ng-binding">Mẫu số : 01GTKT0/001                                        </p>
-                                                    <p>Ký hiệu : ccc</p>
-                                                    <p>Số:<strong style="color:red" class="ng-binding">000000000</strong></p>
+                                                    <p style="padding-top:5px" class="ng-binding">Mẫu số : 01GTKT0/001</p>
+                                                    <p>Ký hiệu : @order.BankCode--@order.Id_order</p>
+                                                    <p>Số&nbsp;:<strong style="color:red" class="ng-binding"> @maso</strong></p>
                                                 </div>
                                                 <div style="float: right; width: 50%; padding:10px 0">
                                                     <div style="text-transform: uppercase;font-size: 24px;font-weight: bold;text-align: center;padding-top:5px;color: red;">
@@ -65,12 +62,12 @@
                                                     </div>
                                                 </div>
                                                 <div id="logo">
-                                                    <img class="images_result" src="~/Asset/Admin/dist/img/avatar2.png" />
+                                                    <img class="images_result" src="~/Asset/img/logo-bugger.jpg" />
                                                 </div>
                                             </div>
                                             <div id="info-seller" style="position:relative">
                                                 <div class="header-title">
-                                                    <h3 class="show_company" style="text-transform: uppercase; font-size: 24px;font-weight:bold;color:3366FF">
+                                                    <h3 class="show_company" style="text-transform: uppercase; font-size: 24px;font-weight:bold;color:#3366FF">
                                                         <span>CÔNG TY CỔ PHẦN BUGGER</span>
                                                     </h3>
                                                     <div class="cominfo">
@@ -200,7 +197,7 @@
                                     </div>
                                     <div style="clear:both;">   &nbsp;  </div>
                                     <div class="bground">
-                                        <img class="images_result" src="~/Asset/images/viettel.jpg" />
+                                        <img class="images_result" src="~/Asset/img/logo-bugger.jpg" />
                                     </div>
                                     <style type="text/css">
                                         .nhanmanh{
@@ -401,8 +398,7 @@
                                             }
 
                                                 .VATTEMP #logo img {
-                                                    width: 60%;
-                                                    margin: 5px;
+                                                    max-width: 160%;
                                                 }
 
                                             .VATTEMP .header-title {

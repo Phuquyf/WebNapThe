@@ -52,7 +52,12 @@ namespace PayCartOnline.Service
             var status = "";
             if (search.Status != 0 && search.Status != null)
             {
-                status = search.Status == 1 ? "Thành Công" : "Chưa Thanh Toán";
+                if(search.Status == 2) 
+                {
+                    status = "Hủy";
+                }
+                else { status = search.Status == 1 ? "Thành Công" : "Chưa Thanh Toán"; }
+                
             }
             else
             {

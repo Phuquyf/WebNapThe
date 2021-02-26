@@ -74,6 +74,7 @@
                     <select class="select_loai_gd_all" id="status" name="typePay">
                         <option value="0">Tất cả</option>
                         <option value="1">Thành công</option>
+                        <option value="-1">Hủy</option>
                         <option value="2">Chưa thanh toán</option>
 
                     </select>
@@ -117,11 +118,15 @@
                             {
                                 <td><a href="/User/DetailsOrder?id=@item.Id_order"><i class="fa fa-eye" aria-hidden="true"></i></a></td>
                             }
-                            else
+                            else if(item.Status == "Hủy")
                             {
-                                <td><a href="/Home/RePay?id=@item.Id_order&menhgia=@item.ID_Denomination&moblie=@item.Phone&nhamang=@item.Brand&type=@item.CardType">Thanh toán lại</a></td>
+                                <td>@*<span>Đơn đã bị Hủy</span>*@</td>
                             }
-                            
+                            else { 
+
+                                <td><a href="/Home/RePay?id=@item.Id_order&menhgia=@item.ID_Denomination&moblie=@item.Phone&nhamang=@item.Brand&type=@item.CardType">Thanh toán lại</a><br /> hoặc <br /> <a href="/Home/CancelOrder?id=@item.Id_order&status=0">Hủy</a></td>                            
+                            }
+
                         </tr>
                             }
 

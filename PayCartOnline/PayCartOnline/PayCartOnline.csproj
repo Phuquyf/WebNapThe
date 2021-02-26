@@ -2136,8 +2136,10 @@
     <Content Include="Asset\css\owl.carousel.min.css" />
     <Content Include="Asset\css\owl.theme.default.css" />
     <Content Include="Asset\css\slideMenu.css" />
+    <Content Include="Asset\css\slider_Bar.css" />
     <Content Include="Asset\css\style.css" />
     <Content Include="Asset\css\swiper-bundle.min.css" />
+    <Content Include="Asset\css\tab-tutorial.css" />
     <Content Include="Asset\css\thanhtoan.css" />
     <Content Include="Asset\fonts\icomoon\demo-files\demo.css" />
     <Content Include="Asset\fonts\icomoon\demo-files\demo.js" />
@@ -2152,6 +2154,7 @@
     <Content Include="Asset\img\broadcast.svg" />
     <Content Include="Asset\img\garena.jpg" />
     <Content Include="Asset\img\gate.jpg" />
+    <Content Include="Asset\img\logo-bugger.jpg" />
     <Content Include="Asset\img\mobile.svg" />
     <Content Include="Asset\img\muaNgay.jpg" />
     <Content Include="Asset\img\slideshow.jpg" />
@@ -2791,6 +2794,7 @@
     <Content Include="Views\Shared\Header_User.cshtml" />
     <Content Include="Views\Shared\SiderBar_User.cshtml" />
     <Content Include="Views\Home\RePay.cshtml" />
+    <Content Include="Views\Home\Tutorial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

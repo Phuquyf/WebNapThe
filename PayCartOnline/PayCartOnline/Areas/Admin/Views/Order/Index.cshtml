@@ -149,19 +149,28 @@
                                         {
                                             if (status == 1)
                                             {
-                                                <option selected value="1">Thành Công</option>
+                                                <option value="1" selected>Thành Công</option>
+                                                <option value="2">Hủy</option>
                                                 <option value="-1">Chưa Thanh Toán  </option>
+                                            }
+                                            else if (status == -1)
+                                            {
+                                                <option value="1">Thành Công</option>
+                                                <option value="2">Hủy</option>
+                                                <option value="-1" selected>Chưa Thanh Toán  </option>
                                             }
                                             else
                                             {
-                                                <option  value="1">Thành Công</option>
-                                                <option selected value="-1">Chưa Thanh Toán  </option>
+                                                <option value="1">Thành Công</option>
+                                                <option value="2" selected>Hủy</option>
+                                                <option value="-1">Chưa Thanh Toán  </option>
                                             }
 
                                         }
                                         else
                                         {
                                             <option value="1">Thành Công</option>
+                                            <option value="2">Hủy</option>
                                             <option value="-1">Chưa Thanh Toán  </option>
                                         }
 
@@ -249,28 +258,32 @@
                                 <tbody id="content">
                                     @foreach (var item in ViewBag.orders)
                                     {
-                                        <tr>
-                                            <td>@item.Code_Order</td>
-                                            <td>@item.Phone </td>
-                                            <td>@item.Brand</td>
-                                            <td>@String.Format(culture, "{0:N0}", @item.Total)VND</td>
-                                            <td>@item.CardType</td>
-                                            <td>VNPAY</td>
-                                            <td>@item.BankCode</td>
-                                            @if (item.Status.Equals("Thành Công"))
-                                            {
-                                                <td><span style="color:green;font-size:12px;"><b>@item.Status</b></span></td>
-                                            }
-                                            else
-                                            {
-                                                <td><span style="color:red;font-size:12px;"><b>@item.Status</b></span></td>
-                                            }
+                                    <tr>
+                                        <td>@item.Code_Order</td>
+                                        <td>@item.Phone </td>
+                                        <td>@item.Brand</td>
+                                        <td>@String.Format(culture, "{0:N0}", @item.Total)VND</td>
+                                        <td>@item.CardType</td>
+                                        <td>VNPAY</td>
+                                        <td>@item.BankCode</td>
+                                        @if (item.Status.Equals("Thành Công"))
+                                        {
+                                            <td><span style="color:green;font-size:12px;"><b>@item.Status</b></span></td>
+                                        }
+                                        else if (item.Status.Equals("Chưa Thanh Toán"))
+                                        {
+                                            <td><span style="color:orange;font-size:12px;"><b>@item.Status</b></span></td>
+                                        }
+                                        else
+                                        {
+                                            <td><span style="color:red;font-size:12px;"><b>@item.Status</b></span></td>
+                                        }
 
-                                            <td>@item.Create_At</td>
+                                        <td>@item.Create_At</td>
 
-                                            <td><a href="/User/DetailsOrder?id=@item.Id_order"><i class="fa fa-eye" aria-hidden="true"></i></a></td>
+                                        <td><a href="/User/DetailsOrder?id=@item.Id_order"><i class="fa fa-eye" aria-hidden="true"></i></a></td>
 
-                                        </tr>
+                                    </tr>
                                     }
 
 

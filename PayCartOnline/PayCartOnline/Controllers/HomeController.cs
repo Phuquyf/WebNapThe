@@ -32,16 +32,16 @@ namespace PayCartOnline.Controllers
             Pay pay = new Pay();
             var user = (CheckUser)Session["Account"];
             if (inforOrder.id_order != 0)
-            {     
-                if(vnPayResponse.vnp_ResponseCode != "00")
+            {
+                if (vnPayResponse.vnp_ResponseCode != "00")
                 {
                     return RedirectToAction("HistoryDeal", "User");
                 }
                 pay.UpdateOrder(vnPayResponse, inforOrder);
             }
             else
-            {             
-                pay.AddOrder(vnPayResponse, user, inforOrder);              
+            {
+                pay.AddOrder(vnPayResponse, user, inforOrder);
             }
             Session.Remove("InforOrder");
             return View(vnPayResponse);
@@ -277,6 +277,17 @@ namespace PayCartOnline.Controllers
             ViewBag.demoUrl = paymentUrl;
             return View();
         }
-
+        public ActionResult Tutorial()
+        {
+            return View();
+        }
+        public ActionResult CancelOrder()
+        {
+            int id = Int32.Parse(Request["id"]);
+            string status = Int32.Parse(Request["status"]) == 0 ? "Hủy" : "";
+            Pay pay = new Pay();
+            pay.CancelOrders(status, id);
+            return RedirectToAction("HistoryDeal", "User");
+        }
     }
 }
