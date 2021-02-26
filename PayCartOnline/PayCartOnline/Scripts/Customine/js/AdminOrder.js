@@ -7,15 +7,7 @@ const submit =() => {
     let expiration = $('#expiration').val();
     let startDate = $('#startDate').val();
 
-    if (startDate = '' && expiration == '' && status == '' && phone == '' && id_denomination == '') {
-        alert('bạn chưa chọn trường tìm kiếm ')
-        return;
-    }
-    if (startDate && expiration  && status  && phone  && id_denomination == '') {
-        alert('bạn chưa chọn trường tìm kiếm ')
-        console.log('abc')
-        return;
-    }
+
 
 
     if (phone != '' &&phone.toString().length != 9) {
@@ -31,7 +23,7 @@ const submit =() => {
 
     console.log(startDate + '' + expiration)
     if (startDate != '' && expiration != '') {
-        if (!(Date.parse(startDate) <= Date.parse(expiration))) {
+        if (!(Date.parse(startDate) < Date.parse(expiration))) {
             alert('chọn lại ngày tìm kiếm')
             return;
         }

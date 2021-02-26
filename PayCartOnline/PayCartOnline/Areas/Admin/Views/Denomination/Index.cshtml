@@ -63,8 +63,8 @@
                             </td>
 
                             <td>
-                                <button type="button" id="Update" onclick="HandleUpdate(@item.ID)" class="btn btn-success"><i class="fas fa-edit"></i></button>
-                                <button type="button" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                                <a href="/Admin/Denomination/Update?id=@item.ID" id="Update" class="btn btn-success"><i class="fas fa-edit"></i></a>
+                                <button type="button" class="btn btn-danger" onclick="deleted(@item.ID)"><i class="fas fa-trash-alt"></i></button>
                             </td>
 
                         </tr>

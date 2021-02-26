@@ -14,34 +14,44 @@ namespace PayCartOnline.Areas.Admin.Controllers
     {
         Handle db = new Handle();
         // GET: Admin/Account
-        public ActionResult Index(int? i,int? page)
+        public ActionResult Index(int? i, int? page)
         {
-            List<CheckUser> list_account = db.GetAllAcount();
-            int pageSize = 5;
-           
-            if (page > 0)
+            CheckUser currentUser = (CheckUser)Session["Account"];
+            if (currentUser != null)
             {
-                page = page;
+                ViewBag.current = currentUser;
+                List<CheckUser> list_account = db.GetAllAcount();
+                int pageSize = 5;
+
+                if (page > 0)
+                {
+                    page = page;
+                }
+                else
+                {
+                    page = 1;
+                }
+                int start = (int)(page - 1) * pageSize;
+
+                ViewBag.pageCurrent = page;
+                int totalPage = list_account.Count();
+                float totalNumsize = (totalPage / (float)pageSize);
+                int numSize = (int)Math.Ceiling(totalNumsize);
+                ViewBag.totalPage = totalPage;
+                ViewBag.pageSize = pageSize;
+                ViewBag.numSize = numSize;
+                ViewBag.numSize = numSize;
+
+
+                ViewBag.list_account = list_account.OrderByDescending(x => x.ID_User).Skip(start).Take(pageSize);
+
+                return View(list_account);
             }
             else
             {
-                page = 1;
+                return RedirectToAction("Index", "Admin");
             }
-            int start = (int)(page - 1) * pageSize;
-
-            ViewBag.pageCurrent = page;
-            int totalPage = list_account.Count();
-            float totalNumsize = (totalPage / (float)pageSize);
-            int numSize = (int)Math.Ceiling(totalNumsize);
-            ViewBag.totalPage = totalPage;
-            ViewBag.pageSize = pageSize;
-            ViewBag.numSize = numSize;
-            ViewBag.numSize = numSize;
-
-
-            ViewBag.list_account = list_account.OrderByDescending(x => x.ID_User).Skip(start).Take(pageSize);
-
-            return View(list_account);
+            
         }
 
 
@@ -70,7 +80,7 @@ namespace PayCartOnline.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Update2(CheckUser user)
         {
-            if(user.ID_User is null)
+            if (user.ID_User is null)
             {
                 user.Create_At = DateTime.Now;
                 db.AddAcc(user);
@@ -79,7 +89,7 @@ namespace PayCartOnline.Areas.Admin.Controllers
             {
                 db.UpdateUser(user);
             }
-          
+
             int x = 1;
             return RedirectToAction("Index");
         }
