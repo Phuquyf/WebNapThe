@@ -329,7 +329,7 @@ namespace PayCartOnline.Service
                 command.CommandText = UpdateAccount;
                 command.Parameters.Add(new SqlParameter("@ID_user", user.ID_User));
                 command.Parameters.Add(new SqlParameter("@Phone", user.Phone));
-                command.Parameters.Add(new SqlParameter("@Pass", user.Pwd));
+                
                 command.Parameters.Add(new SqlParameter("@UserName", user.UserName));
                 command.Parameters.Add(new SqlParameter("@Status", user.Status));
                 command.Parameters.Add(new SqlParameter("@Role", user.Role));
