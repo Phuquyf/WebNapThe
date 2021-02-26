@@ -1,11 +1,43 @@
 ﻿@model PayCartOnline.Models.VNPAY.VnPayResponse
-@if (Model.vnp_ResponseCode == "00")
-{
-    <h1>Bạn đã thanh toán thành công cho SĐT @ViewBag.infor.phone </h1 >
-}
-else
-{
-    <h1>THanh toán lỗi</h1>
+@{ 
+    System.Globalization.CultureInfo culture = new System.Globalization.CultureInfo("en-US");
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var amout = ViewBag.phi.vnp_Amount / 100;
 }
 
-<a href="Home/Index">Trở về Home để tiếp tục thao tác</a>
+<div class="col-sm-12 col-lg-12 col-md-12 col-xl-12" style="background-color: #fff; width: 93.76%;margin: 10px 0px 10px 46.9px;">
+    @if (Model.vnp_ResponseCode == "00")
+    {
+        <div class="container text-center">
+            <i class="fas fa-check-circle" style="font-size: 100px;color:green;"></i>
+            <h1>Thanh toán thành công</h1>
+            <h1><b>@String.Format(culture, "{0:N0}", amout)</b>VNĐ</h1>
+        </div>
+        <div class="container text-center card" style="padding:25px;">
+            <div class="form-group">
+                <h5>Thanh toán số điện thoại : @ViewBag.infor.phone</h5>
+            </div>
+            <div class="form-group">
+                <h5>Thanh toán qua : VNPAY</h5>
+            </div>
+            <div class="form-group">
+                <h5>Mã giao dịch : #@Model.vnp_PayDate</h5>
+            </div>
+        </div>
+        <div class="container text-center">
+            <a class="btn btn-success" href="/User/HistoryDeal">Lịch Sử Giao Dịch</a>
+            <a class="btn btn-secondary" href="/Home/Index">Về Trang Chủ Tiếp Tục Thao Tác</a>
+        </div>
+    }
+    else {
+    <div class="container text-center" style="padding:10px">
+        <i class="fas fa-check-circle" style="font-size: 100px;color:green;"></i>
+        <h1>Thanh toán không thành công</h1>
+        <h1><b>Hãy kiểm tra lại giao dịch của bạn đã chính xác hay chưa </b></h1>
+    </div>  
+    <div class="container text-center" style="padding:10px">
+        <a class="btn btn-success" href="/User/HistoryDeal">Lịch Sử Giao Dịch</a>
+        <a class="btn btn-secondary" href="/Home/Index">Về Trang Chủ Tiếp Tục Thao Tác</a>
+    </div>
+    }
+</div>

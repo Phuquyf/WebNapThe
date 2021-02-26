@@ -2,10 +2,12 @@
     margin : 0;
 }
 
-    .box_all_noidung_thanhtoan {
+.box_all_noidung_thanhtoan {
     background-color: #fff;
     display: block;
     margin-bottom: 15px;
+    width: 93.69%;
+    margin-left: 47px;
 }
     .box_tieude_all_noidung_thanhtoan {
     padding: 30px 50px;
