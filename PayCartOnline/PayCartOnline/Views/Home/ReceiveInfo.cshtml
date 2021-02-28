@@ -15,7 +15,24 @@
                     <ul class="list_all_thongtin_thanhtoan list_all_thongtin_thanhtoan_thongtin">
                         <li>
                             <div class="box_img_thumb_thanhtoan">
-                                <img src="~/Asset/images/viettel.jpg" style="max-width: 110px;max-height: 105px;">
+                                @if (ViewBag.nhamang == "viettel")
+                                {
+                                    <img src="~/Asset/images/viettel.jpg" style="max-width: 110px;max-height: 105px;">
+                                }
+                                else if (ViewBag.nhamang == "vinaPhone")
+                                {
+                                    <img src="~/Asset/images/vinaphone.png" style="max-width: 110px;max-height: 105px;">
+                                }
+                                else if (ViewBag.nhamang == "mobifone")
+                                {
+                                    <img src="~/Asset/images/mobi.png" style="max-width: 110px;max-height: 105px;">
+                                }
+                                else
+                                {
+                                    <img src="~/Asset/images/vietnammobile.png" style="max-width: 110px;max-height: 105px;">
+                                }
+
+
                             </div>
                         </li>
                         <li>
