@@ -27,7 +27,7 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Quản Lý Đơn Hàng</li>
+                        <li class="breadcrumb-item active"><a href="/Admin/Order">Quản Lý Đơn Hàng</a></li>
                     </ol>
                 </div>
 
@@ -151,19 +151,19 @@
                                             {
                                                 <option value="1" selected>Thành Công</option>
                                                 <option value="2">Hủy</option>
-                                                <option value="-1">Chưa Thanh Toán  </option>
+                                                <option value="-1">Chưa Thanh Toán</option>
                                             }
                                             else if (status == -1)
                                             {
                                                 <option value="1">Thành Công</option>
                                                 <option value="2">Hủy</option>
-                                                <option value="-1" selected>Chưa Thanh Toán  </option>
+                                                <option value="-1" selected>Chưa Thanh Toán</option>
                                             }
                                             else
                                             {
                                                 <option value="1">Thành Công</option>
                                                 <option value="2" selected>Hủy</option>
-                                                <option value="-1">Chưa Thanh Toán  </option>
+                                                <option value="-1">Chưa Thanh Toán</option>
                                             }
 
                                         }
@@ -171,7 +171,7 @@
                                         {
                                             <option value="1">Thành Công</option>
                                             <option value="2">Hủy</option>
-                                            <option value="-1">Chưa Thanh Toán  </option>
+                                            <option value="-1">Chưa Thanh Toán</option>
                                         }
 
 
@@ -281,7 +281,7 @@
 
                                         <td>@item.Create_At</td>
 
-                                        <td><a href="/User/DetailsOrder?id=@item.Id_order"><i class="fa fa-eye" aria-hidden="true"></i></a></td>
+                                        <td><a href="/Admin/Order/OrderDetail?id=@item.Id_order"><i class="fa fa-eye" aria-hidden="true"></i></a></td>
 
                                     </tr>
                                     }

@@ -7,8 +7,13 @@ const submit =() => {
     let expiration = $('#expiration').val();
     let startDate = $('#startDate').val();
 
+   
 
-
+    if (startDate === '' && expiration === '' && phone === '' && status === 'Tất cả' && id_denomination === 'Mệnh giá') {
+        
+        alert('Bạn chưa chọn trường tìm kiếm')
+        return;
+    }
 
     if (phone != '' &&phone.toString().length != 9) {
         alert('nhập lại số phone đúng định dạng')

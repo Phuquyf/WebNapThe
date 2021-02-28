@@ -281,13 +281,5 @@ namespace PayCartOnline.Controllers
         {
             return View();
         }
-        public ActionResult CancelOrder()
-        {
-            int id = Int32.Parse(Request["id"]);
-            string status = Int32.Parse(Request["status"]) == 0 ? "Hủy" : "";
-            Pay pay = new Pay();
-            pay.CancelOrders(status, id);
-            return RedirectToAction("HistoryDeal", "User");
-        }
     }
 }

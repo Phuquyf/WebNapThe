@@ -61,6 +61,7 @@ namespace PayCartOnline.Service
                 record.BankCode = item["BankCode"] != null ? item["BankCode"].ToString() : null;
                 record.Create_At =  DateTime.Parse(item["Create_At"].ToString());
                 record.Status = item["Status"].ToString();
+                record.Comment = string.IsNullOrEmpty(item["Comment"].ToString()) ? null : item["Comment"].ToString();
                 
             }
 

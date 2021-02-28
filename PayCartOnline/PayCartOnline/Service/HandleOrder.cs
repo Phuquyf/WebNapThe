@@ -16,6 +16,7 @@ namespace PayCartOnline.Service
 
         private const string TakeAllOrder = "AllOrder";
         private const string Search = "SearchOrderAdmin";
+        private const string updateOrder = "updateOrder";
 
         public List<Order> ListOrder()
         {
@@ -98,6 +99,51 @@ namespace PayCartOnline.Service
             }
 
             return data;
+
+        }
+
+        public void UpdateOrder(string comment, int id_order,int status)
+        {
+            var status2 = "";
+            var connection = new SqlConnection(connectionString);
+            
+            if (status != 0)
+            {
+                if (status == 2)
+                {
+                    status2 = "Hủy";
+                }
+                else { status2 = status == 1 ? "Thành Công" : "Chưa Thanh Toán"; }
+
+            }
+            else
+            {
+                status2 = null;
+            }
+
+            try
+            {
+                connection.Open();
+                var command = connection.CreateCommand();
+
+                command.CommandType = CommandType.StoredProcedure;
+                command.CommandText = updateOrder;
+
+                command.Parameters.AddWithValue("@status", System.Data.SqlDbType.NVarChar).Value = String.IsNullOrEmpty(status2) ? DBNull.Value : (object)status2;
+
+                command.Parameters.AddWithValue("@order_id", System.Data.SqlDbType.Int).Value = id_order ==0 ? DBNull.Value : (object)id_order;
+
+
+                command.Parameters.AddWithValue("@comment", System.Data.SqlDbType.NVarChar).Value = String.IsNullOrEmpty(comment) ? DBNull.Value : (object)comment;
+
+                command.ExecuteNonQuery();
+                connection.Close();
+            }
+
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
 
         }
     }

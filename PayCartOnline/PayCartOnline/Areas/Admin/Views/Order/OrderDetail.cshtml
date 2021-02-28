@@ -1,0 +1,156 @@
+﻿
+
+@{
+    ViewBag.Title = "OrderDetail";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    PayCartOnline.Models.Order order = (PayCartOnline.Models.Order)ViewBag.order;
+    var comment = order.Comment != null ? order.Comment : "";
+
+}
+
+<div class="content-wrapper" style=" background-color: white; ">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+
+            <div class="row mb-2">
+                <div class="col-sm-6">
+
+                    <ol class="breadcrumb float-sm-left">
+
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">
+                            <a href="/Admin/Order">Quản lí đơn hàng</a>
+                        </li>
+                        <li class="breadcrumb-item active">
+                            Đơn hàng chi tiết
+                        </li>
+                    </ol>
+                </div><!-- /.col -->
+
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <a class="btn btn-light" href="/Admin/Order"><i class="fas fa-backward"></i> Back</a>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="form-group " style="display:none;">
+                <label class="control-label col-md-2" for="Id_order">Id_order</label>
+                <div class="col-md-10">
+                    <input class="form-control text-box single-line" id="Id_order" name="Id_order" type="number" value="@order.Id_order" readonly>
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2" for="Code_Order">Mã đơn hàng</label>
+                <div class="col-md-10">
+                    <input class="form-control text-box single-line" id="Code_Order" name="Code_Order" type="text" value="@order.Code_Order" readonly>
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2" for="Phone">Số điện thoại nạp</label>
+                <div class="col-md-10">
+                    <input class="form-control text-box single-line" id="Phone" name="Phone" type="number" value="@order.Phone" readonly>
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2" for="Brand">Nhà mạng</label>
+                <div class="col-md-10">
+                    <input class="form-control text-box single-line" id="Brand" name="Brand" type="text" value="@order.Brand" readonly>
+
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label class="control-label col-md-2" for="CardType">Loại sim</label>
+                <div class="col-md-10">
+                    <input class="form-control text-box single-line" id="CardType" name="CardType" type="text" value="@order.CardType" readonly>
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2" for="BankCode">Ngân hàng</label>
+                <div class="col-md-10">
+                    <input class="form-control text-box single-line" id="BankCode" name="BankCode" type="text" value="@order.BankCode" readonly>
+
+                </div>
+            </div>
+
+
+
+
+            <div class="form-group">
+                <label class="control-label col-md-2" for="Total">Tổng tiền</label>
+                <div class="col-md-10">
+                    <input class="form-control text-box single-line" data-val="true" id="Total" name="Total" type="number" value="@order.Total" readonly>
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2" for="Status">Trạng thái</label>
+                <div class="col-md-10">
+                    <select class="form-control" id="status" name="status">
+                        @if (order.Status.Equals("Thành Công"))
+                        {
+                            <option value="1" selected>Thành Công</option>
+                            <option value="2">Hủy</option>
+                            <option value="-1">Chưa Thanh Toán</option>
+                        }
+                        else if (order.Status.Equals("Chưa Thanh Toán"))
+                        {
+                            <option value="1">Thành Công</option>
+                            <option value="2">Hủy</option>
+                            <option value="-1" selected>Chưa Thanh Toán</option>
+                        }
+                        else
+                        {
+                            <option value="1">Thành Công</option>
+                            <option value="2" selected>Hủy</option>
+                            <option value="-1">Chưa Thanh Toán</option>
+                        }
+                    </select>
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2" for="Total">Ghi chú</label>
+                <div class="col-md-10">
+                    
+                    <textarea rows="4" cols="50" name="comment" id="comment">@comment</textarea>
+                      
+                    
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="button" value="Cập nhật" class="btn btn-primary" onclick="submit()">
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+</div>
+</div>
+<script>
+    const submit = () => {
+        let status = $('#status').val();
+        let comment = $('#comment').val();
+        let id_order = $('#Id_order').val();
+        window.location = "/Admin/Order/UpdateOrder?status=" + status + "&comment=" + comment + "&idOrder=" + id_order;
+
+    }
+</script>
