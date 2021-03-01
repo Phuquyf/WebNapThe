@@ -80,7 +80,7 @@ namespace PayCartOnline.Controllers
             DateTime create_at = DateTime.Now;
             db.RegisterAcc(phone, pass, create_at);
             
-            return RedirectToAction("Index");
+            return RedirectToAction("Login");
         }
         [HttpPost]
         public ActionResult Login(FormCollection data)
@@ -280,6 +280,17 @@ namespace PayCartOnline.Controllers
         public ActionResult Tutorial()
         {
             return View();
+        }
+
+        public ActionResult CancelOrder()
+        {
+            Pay db = new Pay();
+            int id = Int32.Parse(Request["id"]);
+            int status = Int32.Parse(Request["status"]);
+            string _status= status == 0 ? "Hủy" : "";
+           
+            db.CancelOrders(_status, id);
+            return RedirectToAction("HistoryDeal", "User");
         }
     }
 }

@@ -57,22 +57,36 @@ namespace PayCartOnline.Areas.Admin.Controllers
 
         public ActionResult Add()
         {
-            ViewBag.arr_phone = db.ListPhone();
-            List<Roles> list_role = db.ListRole();
-            return View(list_role);
+            if ((CheckUser)Session["Account"] != null)
+            {
+                ViewBag.arr_phone = db.ListPhone();
+                List<Roles> list_role = db.ListRole();
+                return View(list_role);
+            } else
+            {
+                return RedirectToAction("Index", "Admin");
+            }
+               
         }
 
         public ActionResult Update()
         {
-            var id = Request["id"];
+            if ((CheckUser)Session["Account"] != null) 
+            {
+                var id = Request["id"];
 
-            dynamic data = new ExpandoObject();
+                dynamic data = new ExpandoObject();
 
-            data.list_role = db.ListRole();
+                data.list_role = db.ListRole();
 
-            int id_user = Int32.Parse(id);
-            data.account = db.FindAccByID(id_user);
-            return View(data);
+                int id_user = Int32.Parse(id);
+                data.account = db.FindAccByID(id_user);
+                return View(data);
+            } else 
+            {
+                return RedirectToAction("Index", "Admin");
+            }
+                
 
 
         }

@@ -1,4 +1,5 @@
-﻿using PayCartOnline.Models;
+﻿using PayCartOnline.Areas.Admin.AttributeLogin;
+using PayCartOnline.Models;
 using PayCartOnline.Service;
 using System;
 using System.Collections.Generic;
@@ -14,39 +15,50 @@ namespace PayCartOnline.Areas.Admin.Controllers
         // GET: Admin/Denomination
         public ActionResult Index(int? i, int? page)
         {
-            List<Denomination> denominations = db.ShowDenomination();
-            ViewBag.deno = denominations;
-            
-            int pageSize = 5;
-
-            if (page > 0)
+            if ((CheckUser)Session["Account"] != null) 
             {
-                page = page;
+                List<Denomination> denominations = db.ShowDenomination();
+                ViewBag.deno = denominations;
+
+                int pageSize = 5;
+
+                if (page > 0)
+                {
+                    page = page;
+                }
+                else
+                {
+                    page = 1;
+                }
+                int start = (int)(page - 1) * pageSize;
+
+                ViewBag.pageCurrent = page;
+                int totalPage = denominations.Count();
+                float totalNumsize = (totalPage / (float)pageSize);
+                int numSize = (int)Math.Ceiling(totalNumsize);
+                ViewBag.totalPage = totalPage;
+                ViewBag.pageSize = pageSize;
+                ViewBag.numSize = numSize;
+                ViewBag.numSize = numSize;
+
+
+                ViewBag.deno = denominations.OrderByDescending(x => x.ID).Skip(start).Take(pageSize);
+                return View();
             }
             else
             {
-                page = 1;
+                return RedirectToAction("Index", "Admin");
             }
-            int start = (int)(page - 1) * pageSize;
-
-            ViewBag.pageCurrent = page;
-            int totalPage = denominations.Count();
-            float totalNumsize = (totalPage / (float)pageSize);
-            int numSize = (int)Math.Ceiling(totalNumsize);
-            ViewBag.totalPage = totalPage;
-            ViewBag.pageSize = pageSize;
-            ViewBag.numSize = numSize;
-            ViewBag.numSize = numSize;
-
-
-            ViewBag.deno = denominations.OrderByDescending(x => x.ID).Skip(start).Take(pageSize);
-            return View();
+               
         }
+        [CheckLogin]
         public ActionResult Add()
         {
-            return View();
+            int x = 110;
+                return View();
         }
 
+        [CheckLogin]
         [HttpGet]
         public ActionResult Create()
         {
@@ -56,6 +68,7 @@ namespace PayCartOnline.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult CreateOrUpdate()
         {
+
             var price = Convert.ToInt32(Request["Price"]);
             int status = Convert.ToInt32(Request["Status"]);
             if (Request["ID"] != null){
@@ -72,10 +85,18 @@ namespace PayCartOnline.Areas.Admin.Controllers
         }
         public ActionResult Update()
         {
-            var id = Int32.Parse(Request["id"]);
-            Denomination data = db.FinDenomination(id);
-            ViewBag.data = data;
-            return View();
+            if ((CheckUser)Session["Account"] != null)
+            {
+                var id = Int32.Parse(Request["id"]);
+                Denomination data = db.FinDenomination(id);
+                ViewBag.data = data;
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Index", "Admin");
+            }
+               
         }
         [HttpPost]
         public ActionResult Delete(int id)
