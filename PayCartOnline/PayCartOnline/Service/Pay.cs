@@ -45,8 +45,8 @@ namespace PayCartOnline.Service
                 command.Parameters.Add(new SqlParameter("@PHONE", mobile));
                 command.Parameters.Add(new SqlParameter("@BRAND", order.network));
                 command.Parameters.Add(new SqlParameter("@QUANTITY", 1));
-                command.Parameters.Add(new SqlParameter("@TOTAL",vnPayResponse.vnp_Amount/100));
-                command.Parameters.Add(new SqlParameter("@DISCOUNT",1));
+                command.Parameters.Add(new SqlParameter("@TOTAL",order.Total));
+                command.Parameters.Add(new SqlParameter("@DISCOUNT",order.Discount));
                 command.Parameters.Add(new SqlParameter("@STATUS", status));
                 command.Parameters.Add(new SqlParameter("@BANKCODE",vnPayResponse.vnp_BankCode));
                 command.Parameters.Add(new SqlParameter("@CREATED_AT",date));

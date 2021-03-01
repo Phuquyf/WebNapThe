@@ -114,10 +114,11 @@ namespace PayCartOnline.Controllers
 
         [HttpGet]
 
-        public ActionResult DetailsOrder(int id)
+        public ActionResult DetailsOrder()
         {
             if ((CheckUser)Session["Account"] != null)
             {
+                int id = Int32.Parse(Request["id"]);
                 Order order = db.SearchOrder(id);
                 ViewBag.order = order;
                 return View();

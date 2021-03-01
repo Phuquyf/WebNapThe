@@ -133,14 +133,38 @@ namespace PayCartOnline.Controllers
             var type = Request["type"];
             var menhgia = Convert.ToInt32(Request["menhgia"]);
             var valueMenhgia = db.ShowDenomination().Find(c => c.ID == menhgia);
-
+            int total = 0;
+            string discount = "";
             var sdt = Int32.Parse(Request["mobile"]);
+            if(nhamang.Equals("viettel"))
+            {
+                total = valueMenhgia.Price - (int)(valueMenhgia.Price * 2.5) / 100;
+                discount = "2.5%";
+            }
+            else if(nhamang.Equals("mobifone"))
+            {
+                total = valueMenhgia.Price-(int)(valueMenhgia.Price * 4) / 100;
+                discount = "4%";
+            }
+            else if (nhamang.Equals("vinaPhone"))
+            {
+                total = valueMenhgia.Price - (int)(valueMenhgia.Price * 3) / 100;
+                discount = "3%";
+            }
+            else
+            {
+                total = valueMenhgia.Price - (int)(valueMenhgia.Price * 5.4) / 100;
+                discount = "5.4%";
+            }
+            ViewBag.total = total;
 
             InforOrder inforOrder = new InforOrder();
             inforOrder.phone = sdt;
             inforOrder.denomination = valueMenhgia.ID;
             inforOrder.network = nhamang;
             inforOrder.CardType = type;
+            inforOrder.Total = total;
+            inforOrder.Discount = discount;
 
 
             Session["InforOrder"] = inforOrder;
@@ -164,7 +188,7 @@ namespace PayCartOnline.Controllers
             //{
                 order.OrderId = DateTime.Now.Ticks;
                 order.Phone = Convert.ToInt32(Request["mobile"].ToString());
-                order.Amount = Convert.ToInt32(valueMenhgia.Price);
+                order.Amount = Convert.ToInt32(total);
                 order.OrderDescription = "aloalo thanh toan";
                 //order.Amount = Convert.ToDecimal(Request.QueryString["Amount"]);
                 //order.OrderDescription = Request.QueryString["OrderDescription"];
@@ -210,27 +234,21 @@ namespace PayCartOnline.Controllers
         public ActionResult RePay(string moblie,string id)
         {
             var id_order = Int32.Parse( Request["id"]);
-            var nhamang = Request["nhamang"];
-            var type = Request["type"];
-            var menhgia = Convert.ToInt32(Request["menhgia"]);
-            var valueMenhgia = db.ShowDenomination().Find(c => c.ID == menhgia);
-            var sdt = Int32.Parse(moblie);
+            Order currentOrder = db.SearchOrderByOrderID(id_order);
 
             InforOrder inforOrder = new InforOrder();
-            inforOrder.phone = sdt;
-            inforOrder.denomination = valueMenhgia.ID;
-            inforOrder.network = nhamang;
-            inforOrder.CardType = type;
+            
+           
             inforOrder.id_order = id_order;
 
             Session["InforOrder"] = inforOrder;
 
-            ViewBag.mobile = sdt;
-            ViewBag.menhgia = Request["menhgia"];
-
-            ViewBag.valueMenhgia = valueMenhgia;
-            ViewBag.nhamang = Request["nhamang"];
-            ViewBag.type = Request["type"];
+            ViewBag.mobile = currentOrder.Phone;
+            ViewBag.menhgia = currentOrder.Price;
+            ViewBag.discount = currentOrder.Price - currentOrder.Total;
+            ViewBag.total = currentOrder.Total;
+            ViewBag.nhamang = currentOrder.Brand;
+            ViewBag.type = currentOrder.CardType;
 
             string vnp_Returnurl = ConfigurationManager.AppSettings["vnp_Returnurl"]; //URL nhan ket qua tra ve 
             string vnp_Url = ConfigurationManager.AppSettings["vnp_Url"]; //URL thanh toan cua VNPAY 
@@ -241,8 +259,8 @@ namespace PayCartOnline.Controllers
             OrderInfo order = new OrderInfo();
             
             order.OrderId = DateTime.Now.Ticks;
-            order.Phone = Convert.ToInt32(moblie);
-            order.Amount = Convert.ToInt32(valueMenhgia.Price);
+            order.Phone = Convert.ToInt32(currentOrder.Phone);
+            order.Amount = Convert.ToInt32(currentOrder.Total);
             order.OrderDescription = "aloalo thanh toan";          
             order.CreatedDate = DateTime.Now;
             

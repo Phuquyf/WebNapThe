@@ -11,22 +11,74 @@
     <div id="div_Left_OrderInfo">
         <div class="box_tieude_all_noidung_thanhtoan">
             <div class="nong">
+                @*<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <ul class="list_all_thongtin_thanhtoan list_all_thongtin_thanhtoan_thongtin">
+                <li>
+                    <div class="box_img_thumb_thanhtoan">
+                        <img src="~/Asset/images/viettel.jpg" style="max-width: 110px;max-height: 105px;">
+                    </div>
+                </li>
+                <li>
+                    <h6>@ViewBag.type : @ViewBag.nhamang</h6>
+                    <span>@String.Format(culture, "{0:N0}", ViewBag.menhgia)</span>
+                </li>
+                <li>
+                    <h6> Số được nạp</h6>
+                    <span>@ViewBag.mobile</span>
+                </li>
+            </ul>
+        </div>*@
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <ul class="list_all_thongtin_thanhtoan list_all_thongtin_thanhtoan_thongtin">
                         <li>
                             <div class="box_img_thumb_thanhtoan">
-                                <img src="~/Asset/images/viettel.jpg" style="max-width: 110px;max-height: 105px;">
+                                @if (ViewBag.nhamang == "viettel")
+                                {
+                                    <img src="~/Asset/images/viettel.jpg" style="max-width: 110px;max-height: 105px;">
+                                }
+                                else if (ViewBag.nhamang == "vinaPhone")
+                                {
+                                    <img src="~/Asset/images/vinaphone.png" style="max-width: 110px;max-height: 105px;">
+                                }
+                                else if (ViewBag.nhamang == "mobifone")
+                                {
+                                    <img src="~/Asset/images/mobi.png" style="max-width: 110px;max-height: 105px;">
+                                }
+                                else
+                                {
+                                    <img src="~/Asset/images/vietnammobile.png" style="max-width: 110px;max-height: 105px;">
+                                }
+
+
                             </div>
                         </li>
                         <li>
-                            <h6>@ViewBag.type : @ViewBag.nhamang</h6>
-                            <span>@String.Format(culture, "{0:N0}", ViewBag.valueMenhgia.Price)</span>
+                            <h6><b>@ViewBag.type : @ViewBag.nhamang</b></h6>
+                            <span>@String.Format(culture, "{0:N0}", ViewBag.menhgia) VNĐ</span>
                         </li>
                         <li>
                             <h6> Số được nạp</h6>
                             <span>@ViewBag.mobile</span>
                         </li>
-                    </ul>                
+                    </ul>
+                    <ul class="list_all_thongtin_thanhtoan" style="margin-bottom: 0;">
+                        <li>
+                            <h6>Chiết khấu</h6>
+                            <span>@String.Format(culture, "{0:N0}", ViewBag.discount) VND</span>
+                        </li>
+                        <li>
+                            <h6>Thành tiền</h6>
+                            <span>@String.Format(culture, "{0:N0}",ViewBag.total) VND</span>
+                        </li>
+                        <li>
+                            <h6>Phí</h6>
+                            <span id="txtbank">0 VND</span>
+                        </li>
+                        <li>
+                            <h6 style="font-weight: 800;font-size: 15px;">Tổng thanh toán</h6>
+                            <span id="txtTotalAmount">@String.Format(culture, "{0:N0}", ViewBag.total) VND</span>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>

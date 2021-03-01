@@ -13,5 +13,7 @@ namespace PayCartOnline.Models
         public string network { get; set; }
         public int TypePay { get; set; }
         public string CardType { get; set; }
+        public int Total { get; set; }
+        public string Discount { get; set; }
     }
 }

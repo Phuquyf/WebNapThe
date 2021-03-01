@@ -30,10 +30,10 @@ namespace PayCartOnline.Service
         private const string AllOrderByID = "TableOrder";
         private const string Search = "Search";
         private const string SearchOrderByID = "SearchOrderByID";
-        
+        private const string searchOrderByOrderID = "SearchOrderByOrderID";
 
 
-        
+
 
         public Order SearchOrder(int id)
         {
@@ -63,6 +63,33 @@ namespace PayCartOnline.Service
                 record.Status = item["Status"].ToString();
                 record.Comment = string.IsNullOrEmpty(item["Comment"].ToString()) ? null : item["Comment"].ToString();
                 
+            }
+
+            return record;
+
+        }
+        public Order SearchOrderByOrderID(int id)
+        {
+            SqlCommand com = new SqlCommand(searchOrderByOrderID, con);
+            com.CommandType = CommandType.StoredProcedure;
+            com.Parameters.AddWithValue("@Id_order", System.Data.SqlDbType.Int).Value = id == 0 ? DBNull.Value : (object)id;
+
+
+
+            SqlDataAdapter da = new SqlDataAdapter(com);
+            DataTable ds = new DataTable();
+            da.Fill(ds);
+            List<Order> data = new List<Order>();
+            Order record = new Order();
+            foreach (DataRow item in ds.Rows)
+            {
+
+                record.Phone = item["Phone"] != null ? Int32.Parse(item["Phone"].ToString()) : 0;
+                record.Brand = item["Brand"] != null ? item["Brand"].ToString() : null;
+                record.Total = item["Total"] != null ? Convert.ToInt32(item["Total"].ToString()) : 0;
+                record.Price = item["Price"] != null ? Convert.ToInt32(item["Price"].ToString()) : 0;
+                record.CardType = item["CardType"] != null ? item["CardType"].ToString() : null;
+
             }
 
             return record;

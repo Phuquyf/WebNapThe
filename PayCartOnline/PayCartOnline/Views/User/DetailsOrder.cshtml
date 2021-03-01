@@ -91,7 +91,7 @@
                                             </div>
                                             <div id="info-buyer">
                                                 <div style="clear: both;width:100%;border-top:1px solid #000;margin-bottom: 20px;" class="cus">
-                                                    
+
                                                     <p>
                                                         <span class="nameCustomer">
                                                             Số điện thoại được nạp :
@@ -106,24 +106,6 @@
                                                             Nhà Mạng :
                                                         </span>
                                                         <span class="dotted ng-scope">@order.Brand</span>
-                                                        <span style="width:70%; font-size: 22px; font-weight: bold;">
-                                                            <span style="font-size: 22px; font-weight: bold;" class="ng-binding"></span>
-                                                        </span>
-                                                   </p>
-                                                    <p>
-                                                        <span class="nameCustomer">
-                                                            Mệnh Giá :
-                                                        </span>
-                                                        <span class="dotted ng-scope">@String.Format(culture, "{0:N0}", order.Price) VNĐ</span>
-                                                        <span style="width:70%; font-size: 22px; font-weight: bold;">
-                                                            <span style="font-size: 22px; font-weight: bold;" class="ng-binding"></span>
-                                                        </span>
-                                                    </p>
-                                                    <p>
-                                                        <span class="nameCustomer">
-                                                            Thể Loại Thẻ :
-                                                        </span>
-                                                        <span class="dotted ng-scope">@order.CardType</span>
                                                         <span style="width:70%; font-size: 22px; font-weight: bold;">
                                                             <span style="font-size: 22px; font-weight: bold;" class="ng-binding"></span>
                                                         </span>
@@ -146,20 +128,59 @@
                                                             <span style="font-size: 22px; font-weight: bold;" class="ng-binding"></span>
                                                         </span>
                                                     </p>
+
                                                     <p>
                                                         <span class="nameCustomer">
-                                                            Ngày Thanh Toán :
+                                                            Thể Loại Thẻ :
                                                         </span>
-                                                        <span class="dotted ng-scope">@order.Create_At</span>
+                                                        <span class="dotted ng-scope">@order.CardType</span>
                                                         <span style="width:70%; font-size: 22px; font-weight: bold;">
                                                             <span style="font-size: 22px; font-weight: bold;" class="ng-binding"></span>
                                                         </span>
                                                     </p>
                                                     <p>
                                                         <span class="nameCustomer">
+                                                            Mệnh Giá :
+                                                        </span>
+                                                        <span class="dotted ng-scope">@String.Format(culture, "{0:N0}", order.Price) VNĐ</span>
+                                                        <span style="width:70%; font-size: 22px; font-weight: bold;">
+                                                            <span style="font-size: 22px; font-weight: bold;" class="ng-binding"></span>
+                                                        </span>
+                                                    </p>
+                                                    <p>
+                                                        <span class="nameCustomer">
+                                                            Giảm giá :
+                                                        </span>
+                                                        <span class="dotted ng-scope">@String.Format(culture, "{0:N0}", order.Price-order.Total) VNĐ</span>
+                                                        <span style="width:70%; font-size: 22px; font-weight: bold;">
+                                                            <span style="font-size: 22px; font-weight: bold;" class="ng-binding"></span>
+                                                        </span>
+                                                    </p>
+                                                    <p>
+                                                        <span class="nameCustomer">
+                                                            Tổng tiền :
+                                                        </span>
+                                                        <span class="dotted ng-scope"><b class="nhanmanh"> @String.Format(culture, "{0:N0}", order.Total) VNĐ</b></span>
+                                                        <span style="width:70%; font-size: 22px; font-weight: bold;">
+                                                            <span style="font-size: 22px; font-weight: bold;" class="ng-binding"></span>
+                                                        </span>
+                                                    </p>
+
+                                                    <p>
+                                                        <span class="nameCustomer">
                                                             Trạng Thái :
                                                         </span>
                                                         <span class="dotted ng-scope"><b class="nhanmanh"> @order.Status</b></span>
+                                                        <span style="width:70%; font-size: 22px; font-weight: bold;">
+                                                            <span style="font-size: 22px; font-weight: bold;" class="ng-binding"></span>
+                                                        </span>
+                                                    </p>
+
+                                                    <p>
+                                                        <span class="nameCustomer">
+                                                            Ngày Thanh Toán :
+                                                        </span>
+                                                        <span class="dotted ng-scope">@order.Create_At</span>
                                                         <span style="width:70%; font-size: 22px; font-weight: bold;">
                                                             <span style="font-size: 22px; font-weight: bold;" class="ng-binding"></span>
                                                         </span>

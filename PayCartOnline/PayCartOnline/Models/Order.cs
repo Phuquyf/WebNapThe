@@ -30,5 +30,6 @@ namespace PayCartOnline.Models
         public int ID_Denomination { get; set; }
         public int ID_User { get; set; }
         public string Comment { get; set; }
+        public string Discount { get; set; }
     }
 }
