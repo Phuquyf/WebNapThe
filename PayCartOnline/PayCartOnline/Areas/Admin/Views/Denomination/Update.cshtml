@@ -17,17 +17,17 @@
 
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
                     <li class="breadcrumb-item active">
-                        <a href="/Admin/Denomination">Manage Denomination</a>
+                        <a href="/Admin/Denomination">Quản lí mệnh giá</a>
                     </li>
                     <li class="breadcrumb-item active">
-                        Add Denimonation
+                        Cập nhật
                     </li>
                 </ol>
             </div><!-- /.col -->
 
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <a class="btn btn-light" href="/Admin/Denomination"><i class="fas fa-backward"></i> Back</a>
+                    <a class="btn btn-light" href="/Admin/Denomination"><i class="fas fa-backward"></i> Quay lại</a>
                 </ol>
             </div>
         </div>
@@ -44,7 +44,7 @@
                 </div>
             </div>
             <div class="form-group mt-4">
-                <label class="control-label col-md-2" for="Price">Price</label>
+                <label class="control-label col-md-2" for="Price">Mệnh giá</label>
                 <div class="col-md-5">
                     <input class="form-control text-box single-line" id="Price" name="Price" type="number" value="@record.Price" required 
                            placeholder="money VND" min="1" max="1000000">
@@ -53,16 +53,18 @@
             </div>
 
             <div class="form-group mt-4">
-                <label class="control-label col-md-2" for="Price">Status</label>
+                <label class="control-label col-md-2" for="Price">Trạng thái</label>
                 <div class="col-md-5">
                     <select class="form-control" id="Status" name="Status">
                         @if (record.Status.Equals("On"))
                         {
-                            <option value="1" selected="">@record.Status</option>
+                            <option value="1" selected="">On</option>
+                            <option value="0">Off</option>
                         }
                         else
                         {
-                            <option value="0">@record.Status</option>
+                            <option value="1">On</option>
+                            <option value="0" selected>Off</option>
                         }
 
 

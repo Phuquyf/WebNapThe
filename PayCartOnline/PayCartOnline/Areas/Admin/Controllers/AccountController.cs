@@ -107,5 +107,35 @@ namespace PayCartOnline.Areas.Admin.Controllers
             int x = 1;
             return RedirectToAction("Index");
         }
+
+        [HttpPost]
+        public ActionResult ResetPwd(int id)
+        {
+            Boolean status = db.ResetPwd(id);
+            if (status)
+            {
+                return Content("cài lại mật khẩu thành công");
+            }
+            else
+            {
+                return Content("tài khoản không tồn tại");
+            }
+            
+        }
+
+        [HttpPost]
+        public ActionResult RemoveUser()
+        {
+            int id = Int32.Parse(Request["id"]);
+            Boolean status = db.RemoveAcc(id);
+            if (status)
+            {
+                return Content("Đã xóa thành công");
+            }
+            else
+            {
+                return Content("không tồn tại tài khoản này");
+            }
+        }
     }
 }

@@ -2722,7 +2722,6 @@
     <Content Include="Asset\css\font-awesome-4.7.0\scss\_variables.scss" />
     <Content Include="App_Browsers\qt.browser" />
     <Content Include="Areas\Admin\Views\Denomination\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Denomination\Add.cshtml" />
     <Content Include="Areas\Admin\Views\Denomination\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Denomination\Update.cshtml" />
     <Content Include="Areas\Admin\Views\Order\Index.cshtml" />
@@ -2796,6 +2795,7 @@
     <Content Include="Views\Shared\SiderBar_User.cshtml" />
     <Content Include="Views\Home\RePay.cshtml" />
     <Content Include="Views\Home\Tutorial.cshtml" />
+    <Content Include="Views\User\ChangePass.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

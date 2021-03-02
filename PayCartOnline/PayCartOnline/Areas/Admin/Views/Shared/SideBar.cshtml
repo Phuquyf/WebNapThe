@@ -28,14 +28,14 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class
                 with font-awesome or any other icon font library -->
-                <li class="nav-header sidebarcss" style="padding-top: 10px;">
-                    MANAGE ALL ACCOUNT
-                </li>
+                @*<li class="nav-header sidebarcss" style="padding-top: 10px;">
+                    QUẢN LÍ TÀI KHOẢN
+                </li>*@
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="fa  fa-server"></i>
                         <p>
-                            All User
+                            QUẢN LÍ TÀI KHOẢN
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
@@ -43,28 +43,26 @@
                         <li class="nav-item ml-2">
                             <a href="~/Admin/Account" class="nav-link">
                                 <i class="fa fa-briefcase"></i>
-                                <p class="sizep">List User </p>
+                                <p class="sizep">Danh sách tài khoản </p>
                             </a>
                         </li>
                         <li class="nav-item ml-2">
                             <a href="/Admin/Account/Add" class="nav-link">
                                 <i class="fa fa-plus-circle"></i>
-                                <p class="sizep">Add Account </p>
+                                <p class="sizep">Thêm mới </p>
                             </a>
                         </li>
 
                     </ul>
                 </li>
 
-                <li class="nav-header sidebarcss" style="padding-top: 10px;">
-                    MANAGE DENOMINATION
-                </li>
+                
 
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="fa  fa-server"></i>
                         <p>
-                            ALL Denomination
+                            QUẢN LÍ MỆNH GIÁ
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
@@ -72,29 +70,26 @@
                         <li class="nav-item ml-2">
                             <a href="/Admin/Denomination" class="nav-link">
                                 <i class="fa fa-briefcase"></i>
-                                <p class="sizep">List Denomination</p>
+                                <p class="sizep">Danh sách mệnh giá thẻ</p>
                             </a>
                         </li>
                         
                         <li class="nav-item ml-2">
                             <a href="/Admin/Denomination/Create" class="nav-link">
                                 <i class="fa fa-briefcase"></i>
-                                <p class="sizep">Add new</p>
+                                <p class="sizep">Thêm mới</p>
                             </a>
                         </li>
 
                     </ul>
                 </li>
 
-                <li class="nav-header sidebarcss" style="padding-top: 10px;">
-                    Đơn Hàng
-                </li>
 
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="fa  fa-server"></i>
                         <p>
-                           Đơn hàng
+                            QUẢN LÍ ĐƠN HÀNG
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
@@ -102,7 +97,7 @@
                         <li class="nav-item">
                             <a href="/Admin/Order/Index" class="nav-link">
                                 <i class="fa fa-briefcase"></i>
-                                <p class="sizep">Quản Lý Đơn Hàng</p>
+                                <p class="sizep"> Danh sách đơn hàng</p>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -116,154 +111,7 @@
                     </ul>
                 </li>
 
-                <li class="nav-header sidebarcss" style="padding-top: 10px;">
-                    TỔ CHỨC HỌC
-                </li>
-
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="fa fa-desktop"></i>
-                        <p>
-                            Quản lý khóa học
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="fa fa-dot-circle-o"></i>
-                                <p class="sizep">Danh sách khóa học</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="fa fa-plus-circle"></i>
-                                <p class="sizep">Thêm mới khóa học</p>
-                            </a>
-                        </li>
-
-
-                    </ul>
-                </li>
-
-                <li class="nav-header sidebarcss" style="padding-top: 10px;">
-                    TỔ CHỨC THI
-                </li>
-
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="fa fa-graduation-cap"></i>
-                        <p>
-                            Quản lý bài thi
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="fa fa-file-text-o "></i>
-                                <p class="sizep">Danh sách bài thi</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="fa fa-plus-circle"></i>
-                                <p class="sizep">Thêm mới bài thi</p>
-                            </a>
-                        </li>
-
-
-                    </ul>
-                </li>
-
-                <li class="nav-header sidebarcss" style="padding-top: 10px;">
-                    <i class="fa fa-user-md"></i>
-                    CHẤM THI
-                </li>
-
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="fa fa-list-alt "></i>
-                        <p>
-                            Kho đề thi
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="fa fa-file-text-o "></i>
-                                <p class="sizep">Danh sách bài thi</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="fa fa-plus-circle"></i>
-                                <p class="sizep">Thêm mới bài thi</p>
-                            </a>
-                        </li>
-
-
-                    </ul>
-                </li>
-
-                <li class="nav-item">
-                    <a href="~/Admin/Index" class="nav-link">
-                        <i class="fa fa-database"></i>
-                        <p>
-                            Ngân hàng câu hỏi
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="/Admin" class="nav-link">
-                                <i class="fa fa-file-text-o "></i>
-                                <p class="sizep">Danh sách câu hỏi</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="fa fa-plus-circle"></i>
-                                <p class="sizep" data-toggle="modal" data-target="#myModal">Thêm mới câu hỏi</p>
-                            </a>
-                        </li>
-
-
-                    </ul>
-                </li>
-
-                <li class="nav-header sidebarcss" style="padding-top: 10px;">
-                    <i class="fa fa-user-md"></i>
-                    KẾT QUẢ & BÁO CÁO
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="fa fa-file-text "></i>
-                        <p>
-                            Báo cáo
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="fa fa-file-text-o "></i>
-                                <p class="sizep">Danh sách bài thi</p>
-                            </a>
-                        </li>
-
-
-
-                    </ul>
-                </li>
-
-
-
-
-
-
-
+          
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

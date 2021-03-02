@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
-    PayCartOnline.Models.CheckUser  current= (PayCartOnline.Models.CheckUser)ViewBag.current;
+    PayCartOnline.Models.CheckUser current = (PayCartOnline.Models.CheckUser)ViewBag.current;
     var index = 1;
 }
 @model List<PayCartOnline.Models.CheckUser>
@@ -22,7 +22,7 @@
 
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
                         <li class="breadcrumb-item active">
-                            <a href="/Admin/Account">Manage Account</a>
+                            <a href="/Admin/Account">Quản lí tài khoản</a>
                         </li>
                     </ol>
                 </div><!-- /.col -->
@@ -31,18 +31,13 @@
 
 
 
-                        <a href="/Admin/Account/Add" class="btn btn-success" style="margin-right:5px"><i class="fa fa-plus"></i> Add</a>
+                        <a href="/Admin/Account/Add" class="btn btn-success" style="margin-right:5px"><i class="fa fa-plus"></i> Thêm mới</a>
 
 
                         <a id="btnGroupDrop1" class="btn btn-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Hành động
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                            <button class="dropdown-item" onclick="updateStatus(1)"><i class="fa fa-check" style="margin-right:5px"></i>Duyệt tất cả</button>
-                            <button class="dropdown-item" onclick="updateStatus(0)"><i class="fa fa-times" style="margin-right:5px"></i>Bỏ duyệt tất cả</button>
-                            <button class="dropdown-item" onclick="DeleteAll()"><i class="fa fa-trash" style="margin-right:5px"></i>Xóa tất cả</button>
 
-                        </div>
 
                         <!--test-->
                         <!-- The Modal -->
@@ -55,12 +50,12 @@
                     <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Phone</th>
-                            <th scope="col">Password</th>
-                            <th scope="col">UserName</th>
-                            <th scope="col">Role</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">Action</th>
+                            <th scope="col">Điện thoại</th>
+
+                            <th scope="col">Tên tài khoản</th>
+                            <th scope="col">Vai trò</th>
+                            <th scope="col">Trạng thái</th>
+                            <th scope="col">Hành động</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -70,7 +65,7 @@
                             <tr>
                                 <th scope="row">@(index++)</th>
                                 <td>@account.Phone</td>
-                                <td>@account.Pwd</td>
+
                                 <td>@account.UserName</td>
                                 <td>@account.Role</td>
                                 <td>
@@ -88,7 +83,8 @@
                                     @if (current.ID_User != account.ID_User)
                                     {
                                         <button type="button" id="Update" onclick="HandleUpdate(@account.ID_User)" class="btn btn-success"><i class="fas fa-edit"></i></button>
-                                        <button type="button" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                                        <button type="button" class="btn btn-danger" onclick="Delete(@account.ID_User)"><i class="fas fa-trash-alt"></i></button>
+                                        <button type="button" class="btn btn-primary" onclick="Reset(@account.ID_User)"><i class="fa fa-unlock-alt" aria-hidden="true"></i></button>
                                     }
 
                                 </td>
@@ -105,57 +101,95 @@
 
             <!--pagelisst-->
             <div class="row">
-                    <div class="col-6">
-                        <p class="float-sm-left edit_size">Showing 1 to @ViewBag.numSize of  @ViewBag.totalPage entries</p>
-                    </div>
+                <div class="col-6">
+                    <p class="float-sm-left edit_size">Showing 1 to @ViewBag.numSize of  @ViewBag.totalPage entries</p>
+                </div>
 
-                    <div class="col-6">
-                        <ul class="pagination  float-sm-right">
+                <div class="col-6">
+                    <ul class="pagination  float-sm-right">
 
-                            @{
-                                int position;
-                                int pageCurrent = ViewBag.pageCurrent;
+                        @{
+                            int position;
+                            int pageCurrent = ViewBag.pageCurrent;
 
-                                float numSize = ViewBag.numSize;
+                            float numSize = ViewBag.numSize;
 
-                                if (pageCurrent > 1)
+                            if (pageCurrent > 1)
+                            {
+                                <li class="page-item">
+                                    <a class="page-link" href="@Url.Action("/Index", new {page = pageCurrent-1 })" tabindex="-1">Previous</a>
+                                </li>
+                            }
+
+                            for (position = 1; position <= numSize; position++)
+                            {
+
+                                if (position == pageCurrent)
                                 {
-                                    <li class="page-item">
-                                        <a class="page-link" href="@Url.Action("/Index", new {page = pageCurrent-1 })" tabindex="-1">Previous</a>
+                                    <li class="page-item active">
+                                        <a class="page-link" href="@Url.Action("/Index", new {page = position })">@position</a>
                                     </li>
                                 }
 
-                                for (position = 1; position <= numSize; position++)
+                                else
                                 {
-
-                                    if (position == pageCurrent)
-                                    {
-                                        <li class="page-item active">
-                                            <a class="page-link" href="@Url.Action("/Index", new {page = position })">@position</a>
-                                                                </li>
-                                                            }
-
-                                                            else
-                                                            {
-                                                                <li class="page-item">
-                                                                    <a class="page-link" href="@Url.Action("/Index", new {page = position })">@position</a>
-                                                                </li>
-                                                            }
-
-                                                        }
-                                                        if (pageCurrent > 0 && pageCurrent < numSize)
-                                                        {
-                                                            <li class="page-item">
-                                                                <a class="page-link" href="@Url.Action("/Index", new {page = pageCurrent+1 })" tabindex="-1">Next</a>
-                                                            </li>
-                                                        }
+                                    <li class="page-item">
+                                        <a class="page-link" href="@Url.Action("/Index", new {page = position })">@position</a>
+                                    </li>
+                                }
 
                             }
+                            if (pageCurrent > 0 && pageCurrent < numSize)
+                            {
+                                <li class="page-item">
+                                    <a class="page-link" href="@Url.Action("/Index", new {page = pageCurrent+1 })" tabindex="-1">Next</a>
+                                </li>
+                            }
 
-                        </ul>
-                    </div>
+                        }
+
+                    </ul>
                 </div>
+            </div>
         </div>
     </div>
 </div>
-<script src="~/Scripts/Customine/js/UpdateAcc.js"></script>
+<script>
+    const Reset = (id) =>
+    {
+        alert('test')
+        $.ajax({
+            url: '/Admin/Account/ResetPwd',
+            type: 'POST',
+            data: {
+                id: id
+            },
+            success: function (response)
+            {
+                alert(response)
+            }
+        })
+    }
+    const Delete = (id) => {
+        var r = confirm("Bạn chắc chắn muốn xóa không ?");
+        if (r == true) {
+            $.ajax({
+                url: '/Admin/Account/RemoveUser',
+                type: 'POST',
+                data: {
+                    id: id
+                },
+                success: function (response) {
+                    alert(response)
+                    window.location = "/Admin/Account";
+                }
+            })
+          
+        } 
+    }
+
+    const HandleUpdate = (id) => {
+        window.location = "/Admin/Account/Update?id=" + id;
+
+    }
+</script>

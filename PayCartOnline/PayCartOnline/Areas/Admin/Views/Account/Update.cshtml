@@ -16,17 +16,17 @@
 
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
                     <li class="breadcrumb-item active">
-                        <a href="/Admin/Account">Manage Account</a>
+                        <a href="/Admin/Account">Quản lí tài khoản</a>
                     </li>
                     <li class="breadcrumb-item active">
-                        Update Account
+                        Cập nhật
                     </li>
                 </ol>
             </div><!-- /.col -->
 
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <a  class="btn btn-light" href="/Admin/Account"><i class="fas fa-backward"></i> Back</a>
+                    <a  class="btn btn-light" href="/Admin/Account"><i class="fas fa-backward"></i> Trở lại</a>
                 </ol>
             </div>
         </div>
@@ -42,7 +42,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="control-label col-md-2" for="Role">Role</label>
+                <label class="control-label col-md-2" for="Role">Vai trò</label>
                 <div class="col-md-10">
                     <select class="form-control" id="Role" name="Role">
                         @foreach (var role in Model.list_role)
@@ -62,14 +62,14 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="control-label col-md-2" for="Phone">Phone</label>
+                <label class="control-label col-md-2" for="Phone">Điện thoại</label>
                 <div class="col-md-10">
                     <input class="form-control text-box single-line" id="Phone" name="Phone" type="text" value="@Model.account.Phone" onchange="Checkphone()" required readonly>
                     <span class="field-validation-valid text-danger" id="errPhone" style="font-weight: 600; font-size: 15px;"></span>
                 </div>
             </div>
             <div class="form-group">
-                <label class="control-label col-md-2" for="UserName">UserName</label>
+                <label class="control-label col-md-2" for="UserName">Tên tài khoản</label>
                 <div class="col-md-10">
                     <input class="form-control text-box single-line" id="UserName" name="UserName" type="text" value="@Model.account.UserName" required>
                     <span class="field-validation-valid text-danger" id="errUserName" style="font-weight: 600; font-size: 15px;"></span>
@@ -83,7 +83,7 @@
                 </div>
             </div>*@
             <div class="form-group">
-                <label class="control-label col-md-2" for="Status">Status</label>
+                <label class="control-label col-md-2" for="Status">Trạng thái</label>
                 <div class="col-md-10">
                     <select class="form-control" id="Status" name="Status">
                         @if (Model.account.Status == "On")
@@ -106,7 +106,7 @@
             </div>
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Save" class="btn btn-default">
+                    <input type="submit" value="Lưu" class="btn btn-default">
                 </div>
             </div>
         </form>

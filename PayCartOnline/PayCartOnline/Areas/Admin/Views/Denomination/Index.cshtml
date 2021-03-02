@@ -14,17 +14,17 @@
                     <ol class="breadcrumb float-sm-left">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
                         <li class="breadcrumb-item active">
-                            <a href="/Admin">Manage Denomination</a>
+                            <a href="/Admin">Quản lí mệnh giá</a>
                         </li>
                     </ol>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
 
-                        <a href="/Admin/Denomination/Create" class="btn btn-success" style="margin-right:5px"><i class="fa fa-plus"></i> Add</a>
+                        <a href="/Admin/Denomination/Create" class="btn btn-success" style="margin-right:5px"><i class="fa fa-plus"></i> Thêm mới</a>
 
                         <a id="btnGroupDrop1" class="btn btn-light" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Back To
+                            Quay lại
                         </a>
 
                         <!--test-->
@@ -38,9 +38,9 @@
                 <thead>
                     <tr>
                         <th scope="col">STT</th>
-                        <th scope="col">Price</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">Action</th>
+                        <th scope="col">Mệnh giá</th>
+                        <th scope="col">Trạng thái</th>
+                        <th scope="col">Hành động</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -141,7 +141,7 @@
 <script>
     const deleted = (id) => {
 
-        var r = confirm("Do you want to delete");
+        var r = confirm("Bạn có muốn xóa không ?");
         if (r == true) {
             $.ajax({
                 url: '/Admin/Denomination/Delete',
@@ -150,11 +150,12 @@
                     id: id
                 },
                 success: function (response) {
-                    alert('Success')
+                    alert('Xóa thành công')
                     location.reload();
                 }
             });
 
         }
     }
+    
 </script>

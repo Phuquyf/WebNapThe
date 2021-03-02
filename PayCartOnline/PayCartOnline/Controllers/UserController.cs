@@ -49,7 +49,7 @@ namespace PayCartOnline.Controllers
         }
         [HttpGet]
         //[CheckLogin]
-        public ActionResult HistoryDeal(DateTime? startDate, DateTime? expirationDate, int? typePay,int? status)
+        public ActionResult HistoryDeal(DateTime? startDate, DateTime? expirationDate, int? typePay, int? status)
         {
             if ((CheckUser)Session["Account"] != null)
             {
@@ -57,7 +57,7 @@ namespace PayCartOnline.Controllers
                 if (startDate != null || expirationDate != null || typePay != null || status != null)
                 {
                     SearchHistory search = new SearchHistory
-                    { ID_Acc = current.ID_User, StartDate = startDate, ExpirationDate = expirationDate, TypePay = typePay ,Status= status};
+                    { ID_Acc = current.ID_User, StartDate = startDate, ExpirationDate = expirationDate, TypePay = typePay, Status = status };
 
                     List<Order> data = db.SearchHistory(search);
                     ViewBag.startDate = startDate;
@@ -65,7 +65,7 @@ namespace PayCartOnline.Controllers
                     ViewBag.typePay = typePay;
                     ViewBag.orders = data;
                     ViewBag.count = data.Count;
-                    return Json(data,JsonRequestBehavior.AllowGet);
+                    return Json(data, JsonRequestBehavior.AllowGet);
                 }
                 else
                 {
@@ -74,14 +74,14 @@ namespace PayCartOnline.Controllers
                     ViewBag.count = orders.Count;
                     return View();
                 }
-                
+
             }
             else
             {
                 return RedirectToAction("Index", "Home");
             }
         }
-        
+
         [HttpPost]
         public ActionResult AccountUser(FormCollection fc)
         {
@@ -133,20 +133,21 @@ namespace PayCartOnline.Controllers
         public ActionResult ExportPDF(int id)
         {
             Order order = db.SearchOrder(id);
-            try {
+            try
+            {
                 return new ActionAsPdf("DetailsOrder", "User")
                 {
                     FileName = Server.MapPath("~/Content/ListOrder.pdf")
                 };
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine(e.Message);
             }
             return null;
-           
 
-        } 
+
+        }
         public ActionResult ExportExcel(int id)
         {
             if ((CheckUser)Session["Account"] != null)
@@ -229,6 +230,31 @@ namespace PayCartOnline.Controllers
                 return RedirectToAction("Index", "Home");
             }
             return View();
+        }
+
+        public ActionResult ChangePass()
+        {
+            if (Session["Account"] != null)
+            {
+                CheckUser isCheck = (CheckUser)Session["Account"];
+                ViewBag.passwordOld = isCheck;
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Index", "Admin");
+            }
+        }
+        [HttpPost]
+        public ActionResult ChangePass(int id, string pwd)
+        {
+            Boolean status = db.ChangePwdAcc(id, pwd);
+            if (status)
+            {
+                return Content("Thay đổi mật khẩu thành công ");
+            }
+            return Content("Thay đổi mật khẩu thất bại");
+
         }
     }
 }

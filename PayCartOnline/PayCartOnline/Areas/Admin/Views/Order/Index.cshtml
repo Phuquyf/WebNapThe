@@ -112,7 +112,7 @@
 
                                 <!-- Date range -->
                                 <div class="form-group col-lg-4 col-sm-4 col-md-4">
-                                    <label>Start Date</label>
+                                    <label>Ngày bắt đầu</label>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
 
@@ -130,7 +130,7 @@
                                     <!-- /.input group -->
                                 </div>
                                 <div class="form-group col-lg-4 col-sm-4 col-md-4">
-                                    <label>End Date :</label>
+                                    <label>Ngày kết thúc :</label>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
 
@@ -227,17 +227,22 @@
                                         <div class="input-group-prepend">
                                         </div>
                                         <button onclick="submit()" class="btn btn-success">Tìm Kiếm</button>
+                                        <button id="btnGroupDrop1" class="btn btn-light dropdown-toggle ml-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Hành động
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                            <button class="dropdown-item"onclick=""><i class="far fa-file-excel" style="margin-right:5px"></i>Nhập Excel</button>
+                                            <button class="dropdown-item" onclick="ExportExcel()"><i class="far fa-file-excel" style="margin-right:5px"></i>Xuất Excel</button>
+                                        </div>
                                     </div>
-                                    <!-- /.input group -->
+                                   
                                 </div>
                        
                     </div>
                   
                     <!-- /.card-header -->
                     <div class="card-body">
-                        @*<table id="example2" class="table table-bordered table-hover">
-
-            </table>*@
+                        
 
                         <div class="row">
                             <table id="example" class="table table-striped table-bordered" style="width:100%">
@@ -369,5 +374,61 @@
     </section>
     <!-- /.content -->
 </div>
+<script>
+    var orders = @Html.Raw(Json.Encode(ViewBag.orders));
+    
+    const submit = () => {
+        let id_denomination = $('#id_denomination').val();
+        let phone = $('#phone').val();
+        let status = $('#status').val();
+        let expiration = $('#expiration').val();
+        let startDate = $('#startDate').val();
 
-<script src="~/Scripts/Customine/js/AdminOrder.js"></script>
+
+
+        if (startDate === '' && expiration === '' && phone === '' && status === 'Tất cả' && id_denomination === 'Mệnh giá') {
+
+            alert('Bạn chưa chọn trường tìm kiếm')
+            return;
+        }
+
+        if (phone != '' && phone.toString().length != 9) {
+            alert('nhập lại số phone đúng định dạng')
+            return;
+        }
+
+        if (startDate != '' && expiration == '' || startDate == '' && expiration != '') {
+
+            alert('Chưa chọn đủ trường')
+            return
+        }
+
+        console.log(startDate + '' + expiration)
+        if (startDate != '' && expiration != '') {
+            if (!(Date.parse(startDate) < Date.parse(expiration))) {
+                alert('chọn lại ngày tìm kiếm')
+                return;
+            }
+        }
+
+        window.location="/Admin/Order?startDate=" + startDate + "&&expiration=" + expiration +
+            "&status=" + status + "&phone=" + phone + "&id_denomination=" + id_denomination
+
+
+    }
+
+    const ExportExcel = () => {
+       
+
+        let id_denomination = $('#id_denomination').val();
+        let phone = $('#phone').val();
+        let status = $('#status').val();
+        let expiration = $('#expiration').val();
+        let startDate = $('#startDate').val();
+
+        window.location = "/Admin/Order/ExportExcel?startDate=" + startDate + "&&expiration=" + expiration +
+            "&status=" + status + "&phone=" + phone + "&id_denomination=" + id_denomination
+
+       
+    }
+</script>

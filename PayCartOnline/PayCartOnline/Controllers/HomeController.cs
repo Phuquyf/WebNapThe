@@ -19,8 +19,9 @@ namespace PayCartOnline.Controllers
         //VnPayResponse? nong)
 
         public ActionResult Index( )
-        {          
-            ViewBag.menhgia = db.ShowDenomination();        
+        {
+          
+            ViewBag.menhgia = db.ShowDenomination().Where(x => x.Status.Equals("1"));
             return View();
         }
         public ActionResult VnResponse(VnPayResponse vnPayResponse)
@@ -98,6 +99,7 @@ namespace PayCartOnline.Controllers
             }
             else
             {
+                isCheck.Pwd = password;
                 Session["Account"] = isCheck;
 
                 return RedirectToAction("Index", "Admin", new { Area = "Admin" });

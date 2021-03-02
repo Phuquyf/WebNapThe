@@ -1,0 +1,87 @@
+﻿
+@{
+    ViewBag.Title = "ChangePass";
+    Layout = "~/Views/Shared/_Layout_User.cshtml";
+}
+
+<h5>Đổi mật khẩu</h5>
+<div class="row bao-regs-pop popdoanhnghiep2 ra">
+    <div class="col-md-6 col-md-offset-3 ">
+        <div class="popup-login popup-reg ra" id="ChangePass">
+           
+            <div class="heading-form">
+                <h4> Đổi mật khẩu</h4>
+            </div>
+            <form autocomplete="off" id="formChangePass">
+                <p style="color: red; font-style: italic;" id="error_notify_pass"></p>
+                <div class="iconinput">
+                    <input id="txtPasswordOld" type="password" class="input" placeholder="Mật khẩu cũ" maxlength="30">
+                    <span style="cursor:pointer" class="show_hiden_password">
+                        <img src="https://vtcpay.vn/Content/images/bg-pw.png" alt="">
+                    </span>
+                </div>
+                <div class="iconinput have-text error">
+                    <input id="txtPasswordNew" type="password" placeholder="Mật khẩu mới" class="input" maxlength="30" required>
+                    <span style="cursor:pointer" class="show_hiden_password">
+                        <img src="https://vtcpay.vn/Content/images/bg-pw.png" alt="">
+                    </span>
+                    <em><img src="https://vtcpay.vn/Content/Images/check-alt.png" alt="">6 đến 18 ký tự<img src="https://vtcpay.vn/Content/Images/check-alt.png" alt="">Chữ và số</em>
+                </div>
+                <div class="iconinput">
+                    <input type="password" id="txtRePasswordNew" class="input mg-bt-25" placeholder="Nhập lại mật khẩu mới" maxlength="30" required>
+                    <span style="cursor:pointer" class="show_hiden_password">
+                        <img src="https://vtcpay.vn/Content/images/bg-pw.png" alt="">
+                    </span>
+                </div>
+                <input type="hidden" id="hfSignStep">
+                <a href="javascript:;" onclick="ChangePasswordValid();" class="btn-blue btn-full"><span>Đổi mật khẩu</span></a>
+            </form>
+
+        </div> <!-- end popup-reg -->
+    </div>
+</div>
+<script>
+
+    var ischeck = @Html.Raw(Json.Encode(ViewBag.passwordOld));
+  
+    const ChangePasswordValid = () => {
+        
+        let txtPasswordOld = $('#txtPasswordOld').val();
+        let txtPasswordNew = $('#txtPasswordNew').val();
+        let txtRePasswordNew = $('#txtRePasswordNew').val();
+
+        if (txtPasswordOld == '' || txtPasswordNew == '' || txtRePasswordNew == '') {
+            $('#error_notify_pass').html("bạn chưa nhập đủ các trường");
+            return;
+        }
+        if (txtPasswordOld != ischeck.Pwd) {
+            $('#error_notify_pass').html("mật khẩu cũ không đúng, mời nhập lại");
+            return;
+        }
+        if (txtPasswordOld === txtPasswordNew) {
+            $('#error_notify_pass').html("mật khẩu mới không được trùng mật khẩu mới");
+            return;
+        }
+        if (txtPasswordNew !== txtRePasswordNew) {
+            $('#error_notify_pass').html("mật khẩu mới không khớp nhau, mời nhập lại");
+            return;
+        }
+        $('#error_notify_pass').html("");
+
+        $.ajax({
+            url: '/User/ChangePass',
+            type: 'POST',
+            data: {
+                id: ischeck.ID_User,
+                pwd: txtPasswordNew
+            },
+            success: function (response) {
+                alert(response)
+                window.location = "/Home/Logout";
+            }
+        })
+
+    }
+
+</script>
+
